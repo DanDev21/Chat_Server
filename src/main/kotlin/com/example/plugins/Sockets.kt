@@ -13,21 +13,4 @@ fun Application.configureSockets() {
         this.maxFrameSize = Long.MAX_VALUE
         this.masking = false
     }
-
-    routing {
-        webSocket("/") { // websocketSession
-            for (frame in this.incoming) {
-                when (frame) {
-                    is Frame.Text -> {
-                        val text = frame.readText()
-                        this.outgoing.send(Frame.Text("YOU SAID: $text"))
-                        if (text.equals("bye", ignoreCase = true)) {
-                            close(CloseReason(CloseReason.Codes.NORMAL, "Client said BYE"))
-                        }
-                    }
-                    else -> Unit
-                }
-            }
-        }
-    }
 }

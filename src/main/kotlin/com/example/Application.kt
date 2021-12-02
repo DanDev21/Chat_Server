@@ -3,14 +3,14 @@ package com.example
 import io.ktor.application.*
 import com.example.plugins.*
 
-fun main(args: Array<String>): Unit =
-        io.ktor.server.netty.EngineMain.main(args)
+fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
-@Suppress("unused") // application.conf references the main function. This annotation prevents the IDE from marking it as unused.
+@Suppress("unused")
 fun Application.module() {
-    this.configureRouting()
-    this.configureSecurity()
-    this.configureMonitoring()
-    this.configureSerialization()
+    this.configureDependencyInjection()
     this.configureSockets()
+    this.configureRouting()
+    this.configureSerialization()
+    this.configureMonitoring()
+    this.configureSecurity()
 }
